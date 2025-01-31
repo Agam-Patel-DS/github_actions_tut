@@ -1,0 +1,33 @@
+name: Pyhton CI
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+
+        steps:
+            # Step 1: Checkout the code from the repo
+            - name: Check out code
+              uses: actions/checkout@v2
+            # Step 2: Set up python env
+            - name: Set up Python
+              uses: actions/setup-python@v2
+              with:
+                python-version: '3.8'
+            # Step 3: Install dependencies
+            - name: Install dependencies
+              run: |
+                pyhton -m pip install --upgrade pip
+                pip install -r requirements.txt
+            # Step 4: Run tests
+            - name: Run tests
+              run: pytest
+
+
